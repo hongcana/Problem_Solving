@@ -24,6 +24,4 @@ def bs(tree, target, start, end):
             total = mid
             start = mid+1
     return total
-
-
 print(bs(tree, M, 0, max_val))
