@@ -25,8 +25,6 @@ for T in range(int(sys.stdin.readline())):
             if minH:
                 visited[minH[0][1]] = False
                 heapq.heappop(minH)
-        print(maxH)
-        print(minH)
     while minH and not visited[minH[0][1]]:
         heapq.heappop(minH)
     while maxH and not visited[maxH[0][1]]:
