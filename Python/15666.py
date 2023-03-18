@@ -1,9 +1,8 @@
-# BACKTRACKING
 import sys
 read = sys.stdin.readline
 N, M = map(int, read().split())
+num = sorted(set(list(map(int, read().split()))))
 ans = []
-visited = [0 for _ in range(N+1)]
 
 
 def dfs():
@@ -11,12 +10,15 @@ def dfs():
         print(*ans)
         return
 
-    for i in range(1, N+1):
-        if visited[i] == 0:
-            visited[i] = 1
+    for i in num:
+        if len(ans) >= 1:
+            if ans[-1] <= i:
+                ans.append(i)
+                dfs()
+                ans.pop()
+        else:
             ans.append(i)
             dfs()
-            visited[i] = 0
             ans.pop()
 
 
