@@ -20,32 +20,38 @@ chang[1] -= 1
 def bfs(pos, visit):
     q = deque()
     q.append(pos)
+    visit[pos[0]][pos[1]] = 0
     while q:
         x, y = q.popleft()
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
 
-            if 0 <= nx < R and 0 <= ny < C and li[nx][ny] == 0 and visit[nx][ny] == 0:
+            if 0 <= nx < R and 0 <= ny < C and li[nx][ny] == 0 and visit[nx][ny] == -1:
                 visit[nx][ny] = visit[x][y] + 1
-                score[nx][ny] = score[x][y] + 1
                 q.append([nx, ny])
 
 
-score = [[0] * C for _ in range(R)]
-
-visited1 = [[0] * C for _ in range(R)]
+visited1 = [[-1] * C for _ in range(R)]
 bfs(nuck, visited1)
-visited2 = [[0] * C for _ in range(R)]
+visited2 = [[-1] * C for _ in range(R)]
 bfs(swings, visited2)
-visited3 = [[0] * C for _ in range(R)]
+visited3 = [[-1] * C for _ in range(R)]
 bfs(chang, visited3)
-min_val = score[0][0]
-cnt = 1
+
+score = [[0] * C for _ in range(R)]
+for i in range(0, R):
+    for j in range(0, C):
+        if visited1[i][j] != -1 and visited2[i][j] != -1 and visited3[i][j] != -1:
+            score[i][j] = max(visited1[i][j], visited2[i][j], visited3[i][j])
+
+min_val = 1000
+cnt = 0
 pos_r, pos_c = 0, 0
+
 for i in range(R):
     for j in range(C):
-        if score[i][j]:
+        if score[i][j] > 0:
             if min_val > score[i][j]:
                 pos_r = i
                 pos_c = j
@@ -54,9 +60,8 @@ for i in range(R):
             elif min_val == score[i][j]:
                 cnt += 1
 
-if min_val == 0:
+if min_val == 1000:
     print(-1)
 else:
-    print(max(visited1[pos_r][pos_c], visited2[pos_r]
-          [pos_c], visited3[pos_r][pos_c]))
+    print(score[pos_r][pos_c])
     print(cnt)
