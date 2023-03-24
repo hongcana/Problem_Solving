@@ -6,10 +6,7 @@ N = int(read().rstrip())
 li = [list(map(int, read().split())) for _ in range(N)]
 
 result = 0
-for i in range(0, N):
-    if i == (N-1):
-        result += (li[i][0] * li[0][1]) - (li[i][1] * li[0][0])
-    else:
-        result += (li[i][0] * li[i+1][1]) - (li[i][1] * li[i+1][0])
-
+for i in range(0, N-1):
+    result += (li[i][0] * li[i+1][1]) - (li[i][1] * li[i+1][0])
+result += (li[N-1][0] * li[0][1]) - (li[N-1][1] * li[0][0])
 print(abs(round(result/2, 1)))
