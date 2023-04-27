@@ -4,6 +4,7 @@ def solution(fees, records):
     '''
     그냥  simulation 문제
     문자열 파싱 + 해시 + 구현을 적절하게 할 수 있느냐? 를 물어봤던 문제인듯
+    시간복잡도 : O (N log N), sorted() 함수가 지배함
     '''
     dict_in = {}
     result = {}
